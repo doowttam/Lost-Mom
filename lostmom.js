@@ -11,7 +11,7 @@ MOM = function() {
         var imageCount = 0;
         var audioCount = 0;
 
-        var images = [];
+        var images = [ 'bg.png' ];
         var audios = [];
 
         var finished = false;
@@ -66,12 +66,18 @@ MOM = function() {
             canvas  = doc.getElementById("game_canvas");
             context = canvas.getContext("2d");
 
+            map = MOM.map({
+                "context": context,
+                "canvas":  canvas
+            });
+
             sam = MOM.sam({
                 "context": context,
                 "canvas":  canvas,
-                "startX":  350,
-                "startY":  150,
-                "size":    16
+                "startX":  canvas.width / 2,
+                "startY":  canvas.height / 2,
+                "size":    16,
+                "map":     map
             });
 
             win.onkeyup = function(e) {
@@ -91,7 +97,7 @@ MOM = function() {
         play: function() {
             return setInterval( function() {
                 MOM.drawFrame();
-            }, 20 );
+            }, 25 );
         },
 
         pause: function() {
