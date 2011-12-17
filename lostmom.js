@@ -5,6 +5,8 @@ MOM = function() {
 
     var frameInterval = null;
 
+    var sam = null;
+
     var loadResources = function( playCallback ) {
         var imageCount = 0;
         var audioCount = 0;
@@ -64,6 +66,14 @@ MOM = function() {
             canvas  = doc.getElementById("game_canvas");
             context = canvas.getContext("2d");
 
+            sam = MOM.sam({
+                "context": context,
+                "canvas":  canvas,
+                "startX":  350,
+                "startY":  150,
+                "size":    16
+            });
+
             win.onkeyup = function(e) {
                 MOM.key.onKeyUp(e);
             };
@@ -107,6 +117,9 @@ MOM = function() {
         drawFrame: function() {
             this.resetCanvas();
 
+            sam.update();
+
+            sam.draw();
         },
 
         resource: {},
