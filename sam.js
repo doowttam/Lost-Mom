@@ -8,28 +8,30 @@ MOM.sam = function(spec, my) {
     my.x     = spec.startX;
     my.y     = spec.startY;
     my.size  = spec.size;
-    my.speed = 1;
     my.map   = spec.map;
 
     var move = function() {
+        var topLeftX = ( my.canvas.width - my.size ) / 2;
+        var topLeftY = ( my.canvas.height - my.size ) / 2;
+
         if ( MOM.key.isDown(MOM.key.codes.LEFT) ) {
-            if ( my.x  - (my.size / 2) > 0 ) {
-                my.x = my.x - my.speed;
+            if ( my.map.canMoveLeft(topLeftX, topLeftY, my.size) ) {
+                my.x = my.x - 1;
             }
-        }
+       } 
         if ( MOM.key.isDown(MOM.key.codes.RIGHT) ) {
-            if ( my.x + (my.size / 2 ) < my.map.width ) {
-                my.x = my.x + my.speed;
+            if ( my.map.canMoveRight(topLeftX + my.size, topLeftY, my.size) ) {
+                my.x = my.x + 1;
             }
         }
         if ( MOM.key.isDown(MOM.key.codes.UP) ) {
-            if ( my.y - (my.size / 2) > 0 ) {
-                my.y = my.y - my.speed;
+            if ( my.map.canMoveUp(topLeftX, topLeftY, my.size)) {
+                my.y = my.y - 1;
             }
         }
         if ( MOM.key.isDown(MOM.key.codes.DOWN) ) {
-            if ( my.y + (my.size / 2) < my.map.height ) {
-                my.y = my.y + my.speed;
+            if ( my.map.canMoveDown(topLeftX, topLeftY + my.size, my.size) ) {
+                my.y = my.y + 1;
             }
         }
     };

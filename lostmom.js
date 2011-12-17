@@ -74,8 +74,8 @@ MOM = function() {
             sam = MOM.sam({
                 "context": context,
                 "canvas":  canvas,
-                "startX":  canvas.width / 2,
-                "startY":  canvas.height / 2,
+                "startX":  100,
+                "startY":  100,
                 "size":    16,
                 "map":     map
             });
@@ -121,9 +121,9 @@ MOM = function() {
         },
 
         drawFrame: function() {
-            this.resetCanvas();
-
             sam.update();
+
+            this.resetCanvas();
 
             sam.draw();
         },
