@@ -235,7 +235,7 @@ MOM = function() {
                     MOM.distractions.push(distraction);
 
                     // Get a number from 2 -> messagesCount
-                    var i = Math.floor(Math.random() * messagesCount + 2);
+                    var i = Math.ceil(Math.random() * messagesCount + 1);
                     setMessage(i, 3, 1);
                 }
 
