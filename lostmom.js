@@ -24,7 +24,7 @@ MOM = function() {
         var imageCount = 0;
         var audioCount = 0;
 
-        var images = [ 'bg.png', 'toys/toy1.png', 'toys/toy2.png' ];
+        var images = [ 'bg.png', 'toys/toy1.png', 'toys/toy2.png', 'sam.png', 'mom.png' ];
         var audios = [];
 
         var finished = false;
