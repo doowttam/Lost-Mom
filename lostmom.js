@@ -8,7 +8,10 @@ MOM = function() {
     var sam = null;
     var mom = null;
 
-    var frame = 0;
+    var frame     = 0;
+    var framerate = 25;
+
+    var score = 0;
 
     var loadResources = function( playCallback ) {
         var imageCount = 0;
@@ -133,7 +136,7 @@ MOM = function() {
         play: function() {
             return setInterval( function() {
                 MOM.drawFrame();
-            }, 25 );
+            }, framerate );
         },
 
         pause: function() {
@@ -173,25 +176,42 @@ MOM = function() {
                 var offset    = sam.getMapOffset();
                 var offScreen = mom.draw(offset);
                 if ( offScreen ) {
-                    mom = null; // kinda morbid
+                    mom = null; // kinda morbid, did she die???
+
+                    score = frame / framerate;
                 }
 
-            }
+                if ( frame < 300 ) {
+                    drawMessage(1);
+                }
 
-            if ( frame < 300 ) {
-                drawMessage(1);
-            }
+                if ( frame % 200 == 0 ) {
+                    var distraction = MOM.distraction({
+                        "context": context,
+                        "canvas":  canvas
+                    });
+                    MOM.distractions.push(distraction);
+                }
 
-            if ( frame % 200 == 0 ) {
-                var distraction = MOM.distraction({
-                    "context": context,
-                    "canvas":  canvas
-                });
-                MOM.distractions.push(distraction);
+                for ( var i = 0; i < MOM.distractions.length; i++ ) {
+                    MOM.distractions[i].draw();
+                }
             }
+            // Game over
+            else {
+                context.fillStyle = 'rgba(0,0,0,.5)';
+                context.fillRect( 0, 0, canvas.width, canvas.height);
 
-            for ( var i = 0; i < MOM.distractions.length; i++ ) {
-                MOM.distractions[i].draw();
+                context.font = "bold 48px sans-serif";
+                context.fillStyle = "white";
+                context.textAlign = "center";
+                context.textBaseline = "middle";
+                context.fillText("Oh no! You lost your mom!", canvas.width - canvas.width / 2, 100);
+                context.font = "bold 24px sans-serif";
+                context.fillText("You're now alone in the store. :(", canvas.width - canvas.width / 2, 150);
+
+                context.font = "bold 22px sans-serif";
+                context.fillText("You kept up for " + score + " seconds!", canvas.width - canvas.width / 2, 275);
             }
         },
 
