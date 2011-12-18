@@ -25,7 +25,7 @@ MOM = function() {
         var audioCount = 0;
 
         var images = [ 'bg.png', 'toys/toy1.png', 'toys/toy2.png', 'toys/toy3.png', 'toys/toy4.png', 'sam.png', 'mom.png' ];
-        var audios = [ 'distraction.wav' ];
+        var audios = [ 'distraction.wav', 'bg.ogg', 'gameover.ogg' ];
 
         var finished = false;
 
@@ -173,6 +173,16 @@ MOM = function() {
         },
 
         play: function() {
+            if ( mom ) {
+                this.resource['bg.ogg'].addEventListener('ended', function() {
+                    MOM.resource['bg.ogg'].play();
+                });
+                MOM.resource['bg.ogg'].play();
+            }
+            else {
+                MOM.resource['gameover.ogg'].play();
+            }
+
             return setInterval( function() {
                 MOM.drawFrame();
             }, framerate );
@@ -180,6 +190,9 @@ MOM = function() {
 
         pause: function() {
             if ( frameInterval ) {
+                MOM.resource['bg.ogg'].pause();
+                MOM.resource['gameover.ogg'].pause();
+
                 clearInterval( frameInterval );
                 frameInterval = null;
 
@@ -222,6 +235,9 @@ MOM = function() {
                 var offset    = sam.getMapOffset();
                 var offScreen = mom.draw(offset);
                 if ( offScreen ) {
+                    MOM.resource['bg.ogg'].pause();
+                    MOM.resource['gameover.ogg'].play();
+
                     mom = null; // kinda morbid, did she die???
 
                     score = frame / framerate;
