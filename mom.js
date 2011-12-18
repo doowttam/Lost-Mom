@@ -56,10 +56,10 @@ MOM.mom = function(spec, my) {
 
     var isOffscreen = function(x, y) {
         if (
-            x + my.size < 0
-            || y + my.size < 0
-            || x > my.canvas.width
-            || y > my.canvas.height
+            x + my.size < -10
+            || y + my.size < -10
+            || x > my.canvas.width + 10
+            || y > my.canvas.height + 10
         ) {
             return true;
         }
