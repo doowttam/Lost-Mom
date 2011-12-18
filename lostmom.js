@@ -108,9 +108,9 @@ MOM = function() {
                 "context": context,
                 "canvas":  canvas,
                 "startX":  130,
-                "startY":  130,
+                "startY":  100,
                 "size":    20,
-                "pathMap": [ [ 150, 130 ], [ 150, 140 ], [ 130, 140 ], [ 130, 130 ] ]
+                "pathMap": [ [ 600, 100 ], [ 600, 300 ], [ 130, 300 ], [ 130, 100 ] ]
             });
 
             win.onkeyup = function(e) {
