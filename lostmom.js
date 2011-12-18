@@ -13,11 +13,17 @@ MOM = function() {
 
     var score = 0;
 
+    var messagesCount = 7;
+    var message = {
+        "text": '',
+        "time": 0
+    };
+
     var loadResources = function( playCallback ) {
         var imageCount = 0;
         var audioCount = 0;
 
-        var images = [ 'bg.png', 'toys/toy1.png' ];
+        var images = [ 'bg.png', 'toys/toy1.png', 'toys/toy2.png' ];
         var audios = [];
 
         var finished = false;
@@ -67,19 +73,41 @@ MOM = function() {
         }
     };
 
-    var drawMessage = function(msgNum) {
+    var setMessage = function(msgNum, time) {
         var msg;
         switch(msgNum)
         {
         case 1:
-            msg = '"Come on, hun, keep up."';
+            msg = 'Come on, hun, keep up.';
             break;
         case 2:
-            msg = '"Whoa, cool!"';
+            msg = 'Whoa, cool!';
+            break;
+        case 3:
+            msg = 'What does this do?';
+            break;
+        case 4:
+            msg = 'Can we get one of these?';
+            break;
+        case 5:
+            msg = 'Mom, did you see this?';
+            break;
+        case 6:
+            msg = 'Neat!';
+            break;
+        case 7:
+            msg = 'I definitely need this.';
             break;
         }
 
         if ( msg ) {
+            message.text = msg;
+            message.time = time * framerate;
+        }
+    };
+
+    var drawMessage = function() {
+        if ( message.time > 0 ) {
             context.fillStyle = 'rgba(255,255,255,.65)';
             context.fillRect( 0, canvas.height - 60, canvas.width, 75);
 
@@ -87,7 +115,9 @@ MOM = function() {
             context.font = "bold 20px sans-serif";
             context.textAlign = "left";
             context.textBaseline = "top";
-            context.fillText(msg, 20, canvas.height - 50);
+            context.fillText('"' + message.text + '"', 20, canvas.height - 50);
+
+            message.time--;
         }
     };
 
@@ -130,6 +160,7 @@ MOM = function() {
             doc.getElementById("reset").onclick = function() { location.reload() };
 
             loadResources(function() {
+                setMessage(1, 5);
                 frameInterval = MOM.play();
             });
         },
@@ -189,21 +220,23 @@ MOM = function() {
                     score = frame / framerate;
                 }
 
-                if ( frame < 300 ) {
-                    drawMessage(1);
-                }
-
-                if ( frame % 200 == 0 ) {
+                if ( frame % 250 == 0 ) {
                     var distraction = MOM.distraction({
                         "context": context,
                         "canvas":  canvas
                     });
                     MOM.distractions.push(distraction);
+
+                    // Get a number from 2 -> messagesCount
+                    var i = Math.floor(Math.random() * messagesCount + 2);
+                    setMessage(i, 3);
                 }
 
                 for ( var i = 0; i < MOM.distractions.length; i++ ) {
                     MOM.distractions[i].draw();
                 }
+
+                drawMessage();
             }
             // Game over
             else {
