@@ -14,7 +14,7 @@ MOM = function() {
         var imageCount = 0;
         var audioCount = 0;
 
-        var images = [ 'bg.png' ];
+        var images = [ 'bg.png', 'toys/toy1.png' ];
         var audios = [];
 
         var finished = false;
@@ -70,6 +70,9 @@ MOM = function() {
         {
         case 1:
             msg = '"Come on, hun, keep up."';
+            break;
+        case 2:
+            msg = '"Whoa, cool!"';
             break;
         }
 
@@ -178,9 +181,29 @@ MOM = function() {
             if ( frame < 300 ) {
                 drawMessage(1);
             }
+
+            if ( frame % 200 == 0 ) {
+                var distraction = MOM.distraction({
+                    "context": context,
+                    "canvas":  canvas
+                });
+                MOM.distractions.push(distraction);
+            }
+
+            for ( var i = 0; i < MOM.distractions.length; i++ ) {
+                MOM.distractions[i].draw();
+            }
         },
 
         resource: {},
+        distractions: [],
+
+        distraction: function() {
+            return MOM.distraction({
+                "context": context,
+                "canvas":  canvas
+            });
+        },
 
         loading: function(cur, total) {
             this.resetCanvas();
