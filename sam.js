@@ -40,6 +40,10 @@ MOM.sam = function(spec, my) {
         move();
     };
 
+    that.getMapOffset = function() {
+        return my.map.getTopLeft(my.x, my.y);
+    };
+
     that.draw = function() {
         my.map.draw(my.x, my.y);
 

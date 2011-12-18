@@ -72,15 +72,22 @@ MOM.map = function(spec, my) {
         return true;
     };
 
-    that.draw = function(offsetX, offsetY) {
+
+    that.getTopLeft = function(offsetX, offsetY) {
         var topLeftX = (that.width / 2) - offsetX;
         var topLeftY = (that.height / 2) - offsetY;
+
+        return [ topLeftX, topLeftY ];
+    };
+
+    that.draw = function(offsetX, offsetY) {
+        var topLeft = that.getTopLeft(offsetX, offsetY);
 
         my.context.fillStyle = 'black';
         my.context.fillRect( 0, 0, my.canvas.width, my.canvas.width);
 
         var bg = MOM.resource['bg.png']
-        my.context.drawImage( bg, 0, 0, bg.width, bg.height, topLeftX, topLeftY, bg.width, bg.height);
+        my.context.drawImage( bg, 0, 0, bg.width, bg.height, topLeft[0], topLeft[1], bg.width, bg.height);
     };
 
     return that;

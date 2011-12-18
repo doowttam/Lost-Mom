@@ -6,6 +6,7 @@ MOM = function() {
     var frameInterval = null;
 
     var sam = null;
+    var mom = null;
 
     var loadResources = function( playCallback ) {
         var imageCount = 0;
@@ -80,6 +81,15 @@ MOM = function() {
                 "map":     map
             });
 
+            mom = MOM.mom({
+                "context": context,
+                "canvas":  canvas,
+                "startX":  130,
+                "startY":  130,
+                "size":    20,
+                "pathMap": [ [ 150, 130 ], [ 150, 140 ], [ 130, 140 ], [ 130, 130 ] ]
+            });
+
             win.onkeyup = function(e) {
                 MOM.key.onKeyUp(e);
             };
@@ -122,10 +132,15 @@ MOM = function() {
 
         drawFrame: function() {
             sam.update();
+            mom.update();
 
             this.resetCanvas();
 
-            sam.draw();
+            sam.draw(); // also draws map
+
+            var offset = sam.getMapOffset();
+
+            mom.draw(offset);
         },
 
         resource: {},
