@@ -5,7 +5,7 @@ MOM.distraction = function(spec, my) {
     my.context = spec.context;
     my.canvas  = spec.canvas;
 
-    var images    = [ 'toys/toy1.png', 'toys/toy2.png' ];
+    var images    = [ 'toys/toy1.png', 'toys/toy2.png', 'toys/toy3.png', 'toys/toy4.png' ];
     var my_image  = 0;
 
     var coords = [0, 0];
