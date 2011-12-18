@@ -132,15 +132,23 @@ MOM = function() {
 
         drawFrame: function() {
             sam.update();
-            mom.update();
+
+            if ( mom ) {
+                mom.update();
+            }
 
             this.resetCanvas();
 
             sam.draw(); // also draws map
 
-            var offset = sam.getMapOffset();
+            if ( mom ) {
+                var offset    = sam.getMapOffset();
+                var offScreen = mom.draw(offset);
+                if ( offScreen ) {
+                    mom = null; // kinda morbid
+                }
 
-            mom.draw(offset);
+            }
         },
 
         resource: {},

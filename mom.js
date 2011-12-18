@@ -52,13 +52,31 @@ MOM.mom = function(spec, my) {
         checkPath(my.x, my.y);
     };
 
+    var isOffscreen = function(x, y) {
+        if (
+            x + my.size < 0
+            || y + my.size < 0
+            || x > my.canvas.width
+            || y > my.canvas.height
+        ) {
+            return true;
+        }
+        return false;
+    };
+
     that.update = function() {
         move();
     };
 
     that.draw = function(offset) {
         my.context.fillStyle = 'blue';
-        my.context.fillRect( my.x + offset[0], my.y + offset[1], my.size, my.size);
+
+        var x = my.x + offset[0];
+        var y = my.y + offset[1];
+
+        my.context.fillRect( x, y, my.size, my.size);
+
+        return isOffscreen(x, y);
     };
 
     return that;
