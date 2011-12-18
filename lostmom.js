@@ -25,7 +25,7 @@ MOM = function() {
         var audioCount = 0;
 
         var images = [ 'bg.png', 'toys/toy1.png', 'toys/toy2.png', 'toys/toy3.png', 'toys/toy4.png', 'sam.png', 'mom.png' ];
-        var audios = [];
+        var audios = [ 'distraction.wav' ];
 
         var finished = false;
 
@@ -237,6 +237,8 @@ MOM = function() {
                     // Get a number from 2 -> messagesCount
                     var i = Math.ceil(Math.random() * messagesCount + 1);
                     setMessage(i, 3, 1);
+
+                    MOM.resource['distraction.wav'].play();
                 }
 
                 for ( var i = 0; i < MOM.distractions.length; i++ ) {
