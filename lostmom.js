@@ -20,6 +20,8 @@ MOM = function() {
         "speaker": 0,
     };
 
+    var buttons = {};
+
     var loadResources = function( playCallback ) {
         var imageCount = 0;
         var audioCount = 0;
@@ -128,6 +130,33 @@ MOM = function() {
         }
     };
 
+    var showTitleScreen = function() {
+        var bg = MOM.resource['bg.png']
+        context.drawImage( bg, 0, 0, canvas.width, canvas.height, 0, 0, canvas.width, canvas.height);
+
+        context.fillStyle = 'rgba(0,0,0,.7)';
+        context.fillRect( 0, 0, canvas.width, canvas.height);
+
+        context.font = "bold 48px sans-serif";
+        context.fillStyle = "white";
+        context.textAlign = "center";
+        context.textBaseline = "middle";
+        context.fillText('"Mom?"', canvas.width - canvas.width / 2, 100);
+        context.font = "bold 24px sans-serif";
+        context.fillText("Don't get left alone in the store!", canvas.width - canvas.width / 2, 150);
+
+        context.font = "bold 22px sans-serif";
+        context.fillText("Arrow keys move, press the start button to begin!", canvas.width - canvas.width / 2, 275);
+
+        var samImage = MOM.resource[ 'sam.png' ];
+
+        context.drawImage(
+            samImage,
+            0, 0, 16, 16,
+            (canvas.width - 16) / 2, 220, 16, 16
+        );
+    };
+
     return {
         init: function(doc, win) {
             canvas  = doc.getElementById("game_canvas");
@@ -171,13 +200,32 @@ MOM = function() {
                 MOM.key.onKeyDown(e);
             };
 
-            doc.getElementById("pause").onclick = MOM.pause;
-            doc.getElementById("reset").onclick = function() { location.reload() };
+            buttons.start = doc.getElementById("start");
+            buttons.pause = doc.getElementById("pause");
+            buttons.reset = doc.getElementById("reset");
+
+            buttons.start.onclick = MOM.start;
+            buttons.start.disabled = true;
+
+            buttons.pause.onclick = MOM.pause;
+            buttons.pause.disabled = true;
+
+            buttons.reset.onclick = function() { location.reload() };
+            buttons.reset.disabled = true;
 
             loadResources(function() {
-                setMessage(1, 5, 0);
-                frameInterval = MOM.play();
+                buttons.start.disabled = false;
+                showTitleScreen();
             });
+        },
+
+        start: function() {
+            buttons.start.disabled = true;
+            buttons.pause.disabled = false;
+            buttons.reset.disabled = false;
+
+            setMessage(1, 5, 0);
+            frameInterval = MOM.play();
         },
 
         play: function() {
