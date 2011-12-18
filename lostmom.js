@@ -162,6 +162,13 @@ MOM = function() {
         drawFrame: function() {
             frame++;
 
+            // Mega-hack
+            // The distractions mess up the collision detection
+            // So, we render a clean map, check for collision, update
+            // then wipe it and draw everything again
+            this.resetCanvas();
+            sam.draw(); // also draws map
+
             sam.update();
 
             if ( mom ) {
