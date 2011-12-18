@@ -8,6 +8,8 @@ MOM = function() {
     var sam = null;
     var mom = null;
 
+    var frame = 0;
+
     var loadResources = function( playCallback ) {
         var imageCount = 0;
         var audioCount = 0;
@@ -60,7 +62,28 @@ MOM = function() {
             sound.addEventListener('canplaythrough', function() { resourceOnLoad('audio'); } );
             MOM.resource[audios[i]] = sound;
         }
-    }
+    };
+
+    var drawMessage = function(msgNum) {
+        var msg;
+        switch(msgNum)
+        {
+        case 1:
+            msg = '"Come on, hun, keep up."';
+            break;
+        }
+
+        if ( msg ) {
+            context.fillStyle = 'rgba(255,255,255,.65)';
+            context.fillRect( 0, canvas.height - 60, canvas.width, 75);
+
+            context.fillStyle = 'black';
+            context.font = "bold 20px sans-serif";
+            context.textAlign = "left";
+            context.textBaseline = "top";
+            context.fillText(msg, 20, canvas.height - 50);
+        }
+    };
 
     return {
         init: function(doc, win) {
@@ -131,6 +154,8 @@ MOM = function() {
         },
 
         drawFrame: function() {
+            frame++;
+
             sam.update();
 
             if ( mom ) {
@@ -148,6 +173,10 @@ MOM = function() {
                     mom = null; // kinda morbid
                 }
 
+            }
+
+            if ( frame < 300 ) {
+                drawMessage(1);
             }
         },
 
