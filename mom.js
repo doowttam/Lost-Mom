@@ -9,6 +9,8 @@ MOM.mom = function(spec, my) {
     my.y     = spec.startY;
     my.size  = spec.size;
 
+    var frame = 1;
+
     var path = {
         "pathMap": spec.pathMap,
         "next": 0,
@@ -66,6 +68,12 @@ MOM.mom = function(spec, my) {
 
     that.update = function() {
         move();
+        if ( frame <= 9 ) {
+            frame++;
+        }
+        else {
+            frame = 1;
+        }
     };
 
     that.draw = function(offset) {
@@ -74,7 +82,13 @@ MOM.mom = function(spec, my) {
         var x = my.x + offset[0];
         var y = my.y + offset[1];
 
-        my.context.fillRect( x, y, my.size, my.size);
+        var spriteOffset = frame <= 5 ? 0 : 1;
+
+        my.context.drawImage(
+            MOM.resource[ 'mom.png' ],
+            my.size * spriteOffset, 0, my.size, my.size,
+            x, y, my.size, my.size
+        );
 
         return isOffscreen(x, y);
     };

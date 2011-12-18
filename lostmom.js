@@ -110,9 +110,9 @@ MOM = function() {
 
     var drawMessage = function() {
         if ( message.time > 0 ) {
-            var bgColor = 'rgba(255,255,255,.65)';
+            var bgColor = 'rgba(205,117,0,.65)';
             if ( message.speaker == 0 ) {
-                bgColor = 'rgba(255,137,155,.65)';
+                bgColor = 'rgba(0,122,189,.65)';
             }
 
             context.fillStyle = bgColor;
