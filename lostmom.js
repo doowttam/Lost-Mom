@@ -98,8 +98,8 @@ MOM = function() {
             sam = MOM.sam({
                 "context": context,
                 "canvas":  canvas,
-                "startX":  100,
-                "startY":  100,
+                "startX":  750,
+                "startY":  900,
                 "size":    16,
                 "map":     map
             });
@@ -107,10 +107,10 @@ MOM = function() {
             mom = MOM.mom({
                 "context": context,
                 "canvas":  canvas,
-                "startX":  130,
-                "startY":  100,
+                "startX":  750,
+                "startY":  850,
                 "size":    20,
-                "pathMap": [ [ 600, 100 ], [ 600, 300 ], [ 130, 300 ], [ 130, 100 ] ]
+                "pathMap": [ [ 750, 500 ], [ 50, 500 ], [ 50, 100 ], [ 750, 350 ], [ 1500, 350 ] ]
             });
 
             win.onkeyup = function(e) {
