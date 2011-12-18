@@ -16,7 +16,8 @@ MOM = function() {
     var messagesCount = 7;
     var message = {
         "text": '',
-        "time": 0
+        "time": 0,
+        "speaker": 0,
     };
 
     var loadResources = function( playCallback ) {
@@ -73,7 +74,7 @@ MOM = function() {
         }
     };
 
-    var setMessage = function(msgNum, time) {
+    var setMessage = function(msgNum, time, speaker) {
         var msg;
         switch(msgNum)
         {
@@ -103,12 +104,18 @@ MOM = function() {
         if ( msg ) {
             message.text = msg;
             message.time = time * framerate;
+            message.speaker = speaker;
         }
     };
 
     var drawMessage = function() {
         if ( message.time > 0 ) {
-            context.fillStyle = 'rgba(255,255,255,.65)';
+            var bgColor = 'rgba(255,255,255,.65)';
+            if ( message.speaker == 0 ) {
+                bgColor = 'rgba(255,137,155,.65)';
+            }
+
+            context.fillStyle = bgColor;
             context.fillRect( 0, canvas.height - 60, canvas.width, 75);
 
             context.fillStyle = 'black';
@@ -160,7 +167,7 @@ MOM = function() {
             doc.getElementById("reset").onclick = function() { location.reload() };
 
             loadResources(function() {
-                setMessage(1, 5);
+                setMessage(1, 5, 0);
                 frameInterval = MOM.play();
             });
         },
@@ -229,7 +236,7 @@ MOM = function() {
 
                     // Get a number from 2 -> messagesCount
                     var i = Math.floor(Math.random() * messagesCount + 2);
-                    setMessage(i, 3);
+                    setMessage(i, 3, 1);
                 }
 
                 for ( var i = 0; i < MOM.distractions.length; i++ ) {
