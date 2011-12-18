@@ -277,7 +277,7 @@ MOM = function() {
                 context.fillText("You're now alone in the store. :(", canvas.width - canvas.width / 2, 150);
 
                 context.font = "bold 22px sans-serif";
-                context.fillText("You kept up for " + score + " seconds!", canvas.width - canvas.width / 2, 275);
+                context.fillText("You kept up for " + score + " seconds! Try again!", canvas.width - canvas.width / 2, 275);
             }
         },
 
