@@ -127,6 +127,7 @@ MOM = function() {
             };
 
             doc.getElementById("pause").onclick = MOM.pause;
+            doc.getElementById("reset").onclick = function() { location.reload() };
 
             loadResources(function() {
                 frameInterval = MOM.play();
