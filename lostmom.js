@@ -264,11 +264,14 @@ MOM = function() {
                 clearInterval( frameInterval );
                 frameInterval = null;
 
-                context.fillStyle = 'black';
-                context.font = "bold 12px sans-serif";
-                context.textAlign = "right";
-                context.textBaseline = "top";
-                context.fillText("PAUSED", canvas.width - 20, 20);
+                context.fillStyle = 'rgba(0,0,0,.5)';
+                context.fillRect( 0, 0, canvas.width, canvas.height);
+
+                context.font = "bold 48px sans-serif";
+                context.fillStyle = "white";
+                context.textAlign = "center";
+                context.textBaseline = "middle";
+                context.fillText("PAUSED", canvas.width - canvas.width / 2, canvas.height - canvas.height / 2);
             }
             else {
                 frameInterval = MOM.play();
