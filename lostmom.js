@@ -27,7 +27,7 @@ MOM = function() {
         var imageCount = 0;
         var audioCount = 0;
 
-        var images = [ 'bg.png', 'toys/toy1.png', 'toys/toy2.png', 'toys/toy3.png', 'toys/toy4.png', 'sam.png', 'mom.png' ];
+        var images = [ 'map.png', 'toys/toy1.png', 'toys/toy2.png', 'toys/toy3.png', 'toys/toy4.png', 'sam.png', 'mom.png' ];
         var audios = [ 'distraction.wav', 'bg.ogg', 'gameover.ogg' ];
 
         var finished = false;
@@ -143,7 +143,7 @@ MOM = function() {
     };
 
     var showTitleScreen = function() {
-        var bg = MOM.resource['bg.png']
+        var bg = MOM.resource['map.png']
         context.drawImage( bg, 0, 0, canvas.width, canvas.height, 0, 0, canvas.width, canvas.height);
 
         context.fillStyle = 'rgba(0,0,0,.7)';

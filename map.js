@@ -86,7 +86,7 @@ MOM.map = function(spec, my) {
         my.context.fillStyle = 'black';
         my.context.fillRect( 0, 0, my.canvas.width, my.canvas.width);
 
-        var bg = MOM.resource['bg.png']
+        var bg = MOM.resource['map.png']
         my.context.drawImage( bg, 0, 0, bg.width, bg.height, topLeft[0], topLeft[1], bg.width, bg.height);
     };
 
