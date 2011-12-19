@@ -14,8 +14,8 @@ MOM.distraction = function(spec, my) {
         var i = Math.floor(Math.random() * images.length);
         my_image = MOM.resource[ images[i] ];
 
-        var x = Math.floor(Math.random() * my.canvas.width);
-        var y = Math.floor(Math.random() * my.canvas.height);
+        var x = Math.floor(Math.random() * (my.canvas.width - 50) );
+        var y = Math.floor(Math.random() * (my.canvas.height - 50) );
         
         coords[0] = x;
         coords[1] = y;
