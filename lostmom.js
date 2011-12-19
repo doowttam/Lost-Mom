@@ -9,9 +9,10 @@ MOM = function() {
     var mom = null;
 
     var frame     = 0;
-    var framerate = 25;
+    var framerate = 40;
 
-    var score = 0;
+    var score      = 0;
+    var finalscore = 0;
 
     var messagesCount = 7;
     var message = {
@@ -130,6 +131,17 @@ MOM = function() {
         }
     };
 
+    var drawScore = function() {
+        context.fillStyle = 'rgba(0,0,0,.5)';
+        context.fillRect( 605, 20, 100, 20);
+
+        context.fillStyle = 'white';
+        context.font = "bold 12px sans-serif";
+        context.textAlign = "left";
+        context.textBaseline = "top";
+        context.fillText('Score: ' + Math.floor(score), 610, 22);
+    };
+
     var showTitleScreen = function() {
         var bg = MOM.resource['bg.png']
         context.drawImage( bg, 0, 0, canvas.width, canvas.height, 0, 0, canvas.width, canvas.height);
@@ -241,7 +253,7 @@ MOM = function() {
 
             return setInterval( function() {
                 MOM.drawFrame();
-            }, framerate );
+            }, 1000 / framerate );
         },
 
         pause: function() {
@@ -270,6 +282,8 @@ MOM = function() {
         drawFrame: function() {
             frame++;
 
+            score = frame / framerate;
+
             // Mega-hack
             // The distractions mess up the collision detection
             // So, we render a clean map, check for collision, update
@@ -296,7 +310,7 @@ MOM = function() {
 
                     mom = null; // kinda morbid, did she die???
 
-                    score = frame / framerate;
+                    finalscore = score;
                 }
 
                 if ( frame % 250 == 0 ) {
@@ -318,6 +332,7 @@ MOM = function() {
                 }
 
                 drawMessage();
+                drawScore();
             }
             // Game over
             else {
@@ -333,7 +348,7 @@ MOM = function() {
                 context.fillText("You're now alone in the store. :(", canvas.width - canvas.width / 2, 150);
 
                 context.font = "bold 22px sans-serif";
-                context.fillText("You kept up for " + score + " seconds! Try again!", canvas.width - canvas.width / 2, 275);
+                context.fillText("You kept up for " + finalscore + " seconds! Try again!", canvas.width - canvas.width / 2, 275);
             }
         },
 
