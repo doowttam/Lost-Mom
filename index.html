@@ -25,16 +25,22 @@
 
 <body>
 
-  <h1>Mom?</h1>
-    
   <div class="main-container">
-    <canvas id="game_canvas" height="350" width="700"></canvas>
+    <div class="game-container">
+      <canvas id="game_canvas" height="350" width="700">Looks like your browser doesn't support Canavs. Sorry. :(</canvas>
+      <button type="button" id="start">Start</button>
+      <button type="button" id="pause">Pause</button>
+      <button type="button" id="reset">Reset</button>
+    </div>
   </div>
-  <div class="controls-sidebar">
-    <button type="button" id="start">Start</button>
-    <button type="button" id="pause">Pause</button>
-    <button type="button" id="reset">Reset</button>
+
   </div>
+  <p class="footer">
+    Works best in Chrome. Firefox has some performance issues.
+  </p>
+  <p class="footer">
+    Ludum Dare 22 Entry - doowttam
+  </p>
 
 </body>
 
